@@ -1,0 +1,36 @@
+[
+  // Быстрое форматирование документа (Ctrl+Shift+F)
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.formatDocument",
+    "when": "editorTextFocus"
+  },
+  // Комментирование строки (Ctrl+/)
+  {
+    "key": "ctrl+/",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus"
+  },
+  // Поиск (Ctrl+F)
+  {
+    "key": "ctrl+f",
+    "command": "actions.find",
+    "when": "editorTextFocus"
+  },
+  // Дублировать строку вниз (Ctrl+Shift+D)
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus"
+  },
+  // Открыть терминал (Ctrl+`)
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  // Сохранить все (Ctrl+K S)
+  {
+    "key": "ctrl+k s",
+    "command": "workbench.action.files.saveAll"
+  }
+]

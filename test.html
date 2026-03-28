@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест данных</title>
+</head>
+<body>
+    <h1>Тест подключения data.js</h1>
+    <div id="output"></div>
+    
+    <script src="js/data.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        
+        try {
+            console.log('MonsterVaporData:', window.MonsterVaporData);
+            console.log('flavors:', window.MonsterVaporData?.flavors);
+            
+            if (window.MonsterVaporData && window.MonsterVaporData.flavors) {
+                output.innerHTML = `
+                    <h2>✅ Данные загружены!</h2>
+                    <p>Количество вкусов: <strong>${window.MonsterVaporData.flavors.length}</strong></p>
+                    <h3>Список вкусов:</h3>
+                    <ul>
+                        ${window.MonsterVaporData.flavors.map(f => `<li>${f.name} - ${f.flavor}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                output.innerHTML = '<h2>❌ Ошибка: MonsterVaporData не найден!</h2>';
+            }
+        } catch (e) {
+            output.innerHTML = `<h2>❌ Ошибка: ${e.message}</h2>`;
+        }
+    </script>
+</body>
+</html>

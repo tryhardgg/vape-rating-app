@@ -1,0 +1,13 @@
+@startuml
+participant "Сервис 1" as S1
+participant "Сервис 2" as S2
+autonumber
+
+S1 -> S2++ : Заявка на кредит\n+ URL для callback
+S2 --> S1-- : HTTP 202 Accepted
+
+note over S2: Обработка заявки...
+
+S2 -> S1++ : POST /callback\nРешение по заявке
+S1 --> S2-- : HTTP 200 OK
+@enduml

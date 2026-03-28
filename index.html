@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Vapor Tracker</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Шапка с навигацией и поиском -->
+        <header class="header">
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="mv">Monster Vapor</button>
+                <button class="tab-btn" data-tab="other">Эксперименты</button>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Поиск по вкусам...">
+            </div>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Вкладка MV -->
+            <div id="mv-tab" class="tab-content active">
+                <div id="mv-grid" class="cards-grid">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+                <button id="addMvCardBtn" class="add-card-btn">
+                    <span class="plus-icon">+</span>
+                    <span>Добавить жижку</span>
+                </button>
+                <p class="love-text">Любимой девочке &lt;3</p>
+            </div>
+
+            <!-- Вкладка Other -->
+            <div id="other-tab" class="tab-content">
+                <div id="other-grid" class="cards-grid">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+                <button id="addCardBtn" class="add-card-btn">
+                    <span class="plus-icon">+</span>
+                    <span>Добавить эксперимент</span>
+                </button>
+            </div>
+        </main>
+        
+        <!-- Кнопка сброса внизу -->
+        <footer class="footer">
+            <button id="resetBtn" class="reset-btn" title="Сбросить все данные">⚠️ Сброс</button>
+        </footer>
+    </div>
+
+    <!-- Модальное окно редактирования карточки -->
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 class="modal-title">Редактировать карточку</h2>
+            
+            <div class="modal-body">
+                <!-- Поле названия вкуса -->
+                <div class="form-group">
+                    <label for="flavorName">Вкус:</label>
+                    <input type="text" id="flavorName" class="form-input" placeholder="Например: Яблоко с клюквой">
+                </div>
+
+                <!-- Загрузка изображения -->
+                <div class="form-group">
+                    <label for="cardImage">Изображение:</label>
+                    <div class="image-upload-container">
+                        <div id="imagePreview" class="image-preview">
+                            <span class="preview-placeholder">💧</span>
+                        </div>
+                        <input type="file" id="cardImage" class="file-input" accept="image/png,image/jpeg,image/webp">
+                        <label for="cardImage" class="file-label">
+                            📁 Выбрать фото
+                        </label>
+                        <button id="removeImageBtn" class="btn-remove-image" style="display: none;">✕ Удалить</button>
+                    </div>
+                </div>
+
+                <!-- Рейтинг Саша -->
+                <div class="form-group">
+                    <label for="ratingSasha">Саша:</label>
+                    <div class="rating-container">
+                        <select id="ratingSasha" class="rating-select">
+                            <!-- Опции 0-10 с шагом 0.5 -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Рейтинг Настя -->
+                <div class="form-group">
+                    <label for="ratingNastya">Настя:</label>
+                    <div class="rating-container">
+                        <select id="ratingNastya" class="rating-select">
+                            <!-- Опции 0-10 с шагом 0.5 -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Эмодзи (общие) -->
+                <div class="form-group">
+                    <label>Иконки:</label>
+                    <div class="emoji-selector" id="emojiSelector">
+                        <span class="emoji" data-emoji="🌪" title="Сушит - душит">🌪</span>
+                        <span class="emoji" data-emoji="💎" title="Редкий товар">💎</span>
+                        <span class="emoji" data-emoji="⚠️" title="Жжёт испарики">⚠️</span>
+                        <span class="emoji" data-emoji="🧼" title="Мыльный вкус">🧼</span>
+                        <span class="emoji" data-emoji="🍯" title="Быстро надоедает">🍯</span>
+                    </div>
+                </div>
+
+                <!-- Средняя оценка -->
+                <div class="form-group">
+                    <label>Средняя оценка:</label>
+                    <span id="averageRating" class="average-rating">-</span>
+                </div>
+
+                <!-- Выбранные эмодзи (превью) -->
+                <div class="form-group">
+                    <label>Эмодзи на карточке:</label>
+                    <div id="selectedEmojis" class="selected-emojis">
+                        <span class="empty-hint">Выберите эмодзи выше</span>
+                    </div>
+                </div>
+
+                <!-- Примечание -->
+                <div class="form-group">
+                    <label for="note">Примечание:</label>
+                    <textarea id="note" class="form-textarea" placeholder="Ваши заметки о вкусе..."></textarea>
+                </div>
+
+                <!-- Кнопки действий -->
+                <div class="modal-actions">
+                    <button id="saveBtn" class="btn btn-save">Сохранить</button>
+                    <button id="deleteBtn" class="btn btn-delete" style="display: none;">Удалить</button>
+                    <button id="cancelBtn" class="btn btn-cancel">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения сброса -->
+    <div id="resetModal" class="modal">
+        <div class="modal-content reset-modal">
+            <button class="modal-close" id="resetModalClose">&times;</button>
+            <h2 class="modal-title">⚠️ Подтверждение сброса</h2>
+            
+            <div class="modal-body">
+                <p class="reset-warning">
+                    Вы уверены, что хотите сбросить все данные?<br><br>
+                    Это действие <strong>нельзя отменить</strong>.<br>
+                    Все оценки, иконки и примечания будут удалены.
+                </p>
+                
+                <div class="form-group">
+                    <label for="resetConfirmInput">Для подтверждения введите слово <strong>"Сброс"</strong>:</label>
+                    <input type="text" id="resetConfirmInput" class="form-input" placeholder="Введите слово Сброс">
+                </div>
+
+                <div class="modal-actions">
+                    <button id="confirmResetBtn" class="btn btn-delete" disabled>Сбросить всё</button>
+                    <button id="cancelResetBtn" class="btn btn-cancel">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

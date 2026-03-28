@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="appleCranberryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d63031;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#appleCranberryGrad)"/>
+  <text x="200" y="80" font-family="Montserrat" font-size="24" fill="white" text-anchor="middle" font-weight="bold">Apple Cranberry</text>
+  <text x="200" y="120" font-family="Montserrat" font-size="16" fill="white" text-anchor="middle">Яблоко с клюквой</text>
+  <text x="200" y="170" font-family="Arial" font-size="60" fill="white" text-anchor="middle">🍎🫐</text>
+</svg>
