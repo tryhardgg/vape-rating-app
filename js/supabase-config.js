@@ -2,8 +2,8 @@
 const SUPABASE_URL = 'https://ajihwuotwwogahsgqdnv.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_clt5vZsr3RJRP4sf5frMCw_GFf6rx6i';
 
-// Инициализация клиента Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Инициализация клиента Supabase (используем window.supabase из библиотеки)
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Вспомогательные функции для работы с базой данных
 
@@ -12,7 +12,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
  */
 async function saveCardToSupabase(card) {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('cards')
             .upsert({
                 card_id: String(card.id),
@@ -42,7 +42,7 @@ async function saveCardToSupabase(card) {
  */
 async function loadCardsFromSupabase() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('cards')
             .select('*');
         
