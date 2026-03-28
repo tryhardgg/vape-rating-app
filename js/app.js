@@ -22,7 +22,7 @@ let appState = {
 /**
  * Инициализация приложения при загрузке страницы
  */
-function initApp() {
+async function initApp() {
     // Загружаем данные из localStorage
     const savedData = MonsterVaporStorage.loadData();
     
@@ -32,6 +32,16 @@ function initApp() {
         // Инициализируем данными Monster Vapor
         appState.cards = MonsterVaporData.initializeMonsterVaporData();
     }
+    
+    // Синхронизируемся с Supabase
+    console.log('🔄 Syncing with Supabase...');
+    const syncedCards = await syncWithSupabase(appState.cards);
+    if (syncedCards && syncedCards.length > 0) {
+        appState.cards = syncedCards;
+        // Сохраняем синхронизированные данные локально
+        MonsterVaporStorage.saveData({ cards: appState.cards });
+    }
+    console.log('✅ Sync complete!');
     
     // Инициализируем UI элементы
     initTabs();

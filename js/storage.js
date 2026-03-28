@@ -45,7 +45,7 @@ function loadData() {
  * @param {Array} allCards - весь массив карточек для обновления
  * @returns {Array} обновлённый массив карточек
  */
-function saveCard(id, cardData, allCards) {
+async function saveCard(id, cardData, allCards) {
     const index = allCards.findIndex(card => card.id === id);
     
     if (index !== -1) {
@@ -57,6 +57,12 @@ function saveCard(id, cardData, allCards) {
     }
     
     saveData({ cards: allCards });
+    
+    // Сохраняем в Supabase
+    if (typeof saveCardToSupabase === 'function') {
+        await saveCardToSupabase(allCards[index]);
+    }
+    
     return allCards;
 }
 
