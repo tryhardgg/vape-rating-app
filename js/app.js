@@ -146,11 +146,11 @@ function filterCardsBySearch(cards) {
     if (!appState.searchQuery) {
         return cards;
     }
-    
+
     return cards.filter(card => {
-        const nameMatch = card.name.toLowerCase().includes(appState.searchQuery);
-        const flavorMatch = card.flavor.toLowerCase().includes(appState.searchQuery);
-        const brandMatch = card.brand.toLowerCase().includes(appState.searchQuery);
+        const nameMatch = card.name ? card.name.toLowerCase().includes(appState.searchQuery) : false;
+        const flavorMatch = card.flavor ? card.flavor.toLowerCase().includes(appState.searchQuery) : false;
+        const brandMatch = card.brand ? card.brand.toLowerCase().includes(appState.searchQuery) : false;
         return nameMatch || flavorMatch || brandMatch;
     });
 }

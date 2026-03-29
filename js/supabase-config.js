@@ -98,19 +98,25 @@ function calculateAverageRating(ratingSasha, ratingNastya) {
  * Синхронизировать локальные данные с Supabase
  */
 async function syncWithSupabase(localCards) {
-    // Загружаем данные из Supabase
-    const remoteCards = await loadCardsFromSupabase();
-    
-    if (remoteCards.length === 0) {
-        // Если в базе пусто, сохраняем локальные данные
-        for (const card of localCards) {
-            if (card.isFilled) {
-                await saveCardToSupabase(card);
+    try {
+        // Загружаем данные из Supabase
+        const remoteCards = await loadCardsFromSupabase();
+        
+        if (remoteCards.length === 0) {
+            // Если в базе пусто, сохраняем локальные данные
+            for (const card of localCards) {
+                if (card.isFilled) {
+                    await saveCardToSupabase(card);
+                }
             }
+            return localCards;
         }
+        
+        // Если в базе есть данные, используем их
+        return remoteCards;
+    } catch (error) {
+        console.warn('⚠️ Supabase не доступен, используем локальные данные:', error.message);
+        // Возвращаем локальные данные если Supabase не работает
         return localCards;
     }
-    
-    // Если в базе есть данные, используем их
-    return remoteCards;
 }
