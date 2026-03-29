@@ -49,17 +49,26 @@ async function loadCardsFromSupabase() {
         if (error) throw error;
         
         // Преобразуем данные в формат приложения
-        const cards = data.map(row => ({
-            id: row.card_id,
-            flavor: row.flavor,
-            note: row.note,
-            image: row.image,
-            ratingSasha: row.rating_sasha,
-            ratingNastya: row.rating_nastya,
-            emojis: row.emojis || [],
-            isFilled: row.is_filled,
-            isOther: false
-        }));
+        const cards = data.map(row => {
+            // Вычисляем средний рейтинг
+            const avgRating = calculateAverageRating(row.rating_sasha, row.rating_nastya);
+            
+            return {
+                id: row.card_id,
+                name: '', // Название будет из data.js
+                flavor: row.flavor,
+                note: row.note,
+                image: row.image,
+                ratingSasha: row.rating_sasha,
+                ratingNastya: row.rating_nastya,
+                averageRating: avgRating,
+                emojis: row.emojis || [],
+                emojisSasha: row.emojis || [],
+                emojisNastya: row.emojis || [],
+                isFilled: row.is_filled,
+                isOther: false
+            };
+        });
         
         console.log('✅ Loaded', cards.length, 'cards from Supabase');
         return cards;
@@ -67,6 +76,22 @@ async function loadCardsFromSupabase() {
         console.error('❌ Error loading cards:', error);
         return [];
     }
+}
+
+/**
+ * Вычисляет средний рейтинг
+ */
+function calculateAverageRating(ratingSasha, ratingNastya) {
+    if (ratingSasha === null && ratingNastya === null) {
+        return null;
+    }
+    if (ratingSasha === null) {
+        return ratingNastya;
+    }
+    if (ratingNastya === null) {
+        return ratingSasha;
+    }
+    return Math.round(((ratingSasha + ratingNastya) / 2) * 10) / 10;
 }
 
 /**
