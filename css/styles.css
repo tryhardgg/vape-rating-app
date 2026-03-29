@@ -130,11 +130,14 @@ body::before {
 .search-container {
     flex: 1;
     max-width: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .search-input {
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 40px 12px 20px;
     font-size: 16px;
     font-family: 'Galaktika', sans-serif;
     border: 2px solid transparent;
@@ -152,6 +155,58 @@ body::before {
 
 .search-input::placeholder {
     color: var(--text-secondary);
+}
+
+/* Крестик очистки поиска */
+.clear-search-btn {
+    position: absolute;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.clear-search-btn:hover {
+    background-color: var(--accent);
+    color: var(--text-primary);
+}
+
+/* --- КНОПКА TELEGRAM --- */
+.telegram-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(128, 0, 32, 0.6);
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(128, 0, 32, 0.4);
+}
+
+.telegram-btn:hover {
+    background-color: rgba(128, 0, 32, 0.9);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(128, 0, 32, 0.6);
+}
+
+.telegram-btn svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */

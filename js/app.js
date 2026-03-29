@@ -116,10 +116,24 @@ function renderCurrentTab() {
  */
 function initSearch() {
     const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
     
     searchInput.addEventListener('input', (e) => {
         appState.searchQuery = e.target.value.toLowerCase().trim();
+        
+        // Показываем/скрываем крестик
+        clearSearchBtn.style.display = appState.searchQuery ? 'flex' : 'none';
+        
         renderCurrentTab();
+    });
+    
+    // Очистка поиска по клику на крестик
+    clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        appState.searchQuery = '';
+        clearSearchBtn.style.display = 'none';
+        renderCurrentTab();
+        searchInput.focus();
     });
 }
 
