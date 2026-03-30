@@ -49,7 +49,6 @@ async function initApp() {
     initModal();
     initAddCardButton();
     initAddMvCardButton();
-    initResetButton();
     initScrollToTop();
     
     // Рендерим карточки для текущей вкладки
@@ -665,56 +664,6 @@ function initAddMvCardButton() {
             addNewCard('mv');
         });
     }
-}
-
-/**
- * Инициализация кнопки сброса данных
- */
-function initResetButton() {
-    const resetBtn = document.getElementById('resetBtn');
-    const resetModal = document.getElementById('resetModal');
-    const resetModalClose = document.getElementById('resetModalClose');
-    const cancelResetBtn = document.getElementById('cancelResetBtn');
-    const confirmResetBtn = document.getElementById('confirmResetBtn');
-    const resetConfirmInput = document.getElementById('resetConfirmInput');
-    
-    // Открытие модального окна сброса
-    resetBtn.addEventListener('click', () => {
-        resetModal.classList.add('active');
-        resetConfirmInput.value = '';
-        confirmResetBtn.disabled = true;
-    });
-    
-    // Закрытие модального окна
-    const closeResetModal = () => {
-        resetModal.classList.remove('active');
-    };
-    
-    resetModalClose.addEventListener('click', closeResetModal);
-    cancelResetBtn.addEventListener('click', closeResetModal);
-    
-    // Закрытие по клику вне окна
-    resetModal.addEventListener('click', (e) => {
-        if (e.target === resetModal) {
-            closeResetModal();
-        }
-    });
-    
-    // Проверка ввода слова "Сброс"
-    resetConfirmInput.addEventListener('input', (e) => {
-        const value = e.target.value.trim();
-        confirmResetBtn.disabled = value !== 'Сброс';
-    });
-    
-    // Подтверждение сброса
-    confirmResetBtn.addEventListener('click', () => {
-        const value = resetConfirmInput.value.trim();
-        if (value === 'Сброс') {
-            resetAppData();
-            closeResetModal();
-            alert('✅ Данные сброшены! Создано 34 карточки Monster Vapor.');
-        }
-    });
 }
 
 /**

@@ -568,25 +568,6 @@ body::before {
     transform: translateX(-50%) translateY(0) scale(1);
 }
 
-/* --- КНОПКА СБРОСА --- */
-.reset-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-    border: 2px solid var(--accent);
-    border-radius: var(--border-radius);
-    background-color: transparent;
-    color: var(--accent);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.reset-btn:hover {
-    background-color: var(--accent);
-    color: var(--text-primary);
-}
-
 /* --- КНОПКА ДОБАВЛЕНИЯ --- */
 .add-card-btn {
     display: flex;
@@ -645,12 +626,30 @@ body::before {
     padding: 30px;
     width: 90%;
     max-width: 500px;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
     position: relative;
     box-shadow: var(--shadow-hover);
     transform: scale(0.9);
     transition: transform 0.3s ease;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
 }
 
 .modal.active .modal-content {
@@ -659,8 +658,8 @@ body::before {
 
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
     background: none;
     border: none;
     color: var(--text-secondary);
@@ -959,14 +958,6 @@ body::before {
 #confirmResetBtn:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-}
-
-/* --- FOOTER (кнопка сброса внизу) --- */
-.footer {
-    display: flex;
-    justify-content: center;
-    padding: 30px 0;
-    margin-top: 20px;
 }
 
 /* --- КНОПКА СКРОЛЛА ВВЕРХ --- */

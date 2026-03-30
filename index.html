@@ -58,10 +58,6 @@
             </div>
         </main>
         
-        <!-- Кнопка сброса внизу -->
-        <footer class="footer">
-            <button id="resetBtn" class="reset-btn" title="Сбросить все данные">⚠️ Сброс</button>
-        </footer>
         <!-- Кнопка скролла вверх -->
         <button id="scrollToTopBtn" class="scroll-to-top-btn" style="display: none;" title="Наверх">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
@@ -155,32 +151,6 @@
                     <button id="saveBtn" class="btn btn-save">Сохранить</button>
                     <button id="deleteBtn" class="btn btn-delete" style="display: none;">Удалить</button>
                     <button id="cancelBtn" class="btn btn-cancel">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно подтверждения сброса -->
-    <div id="resetModal" class="modal">
-        <div class="modal-content reset-modal">
-            <button class="modal-close" id="resetModalClose">&times;</button>
-            <h2 class="modal-title">⚠️ Подтверждение сброса</h2>
-            
-            <div class="modal-body">
-                <p class="reset-warning">
-                    Вы уверены, что хотите сбросить все данные?<br><br>
-                    Это действие <strong>нельзя отменить</strong>.<br>
-                    Все оценки, иконки и примечания будут удалены.
-                </p>
-                
-                <div class="form-group">
-                    <label for="resetConfirmInput">Для подтверждения введите слово <strong>"Сброс"</strong>:</label>
-                    <input type="text" id="resetConfirmInput" class="form-input" placeholder="Введите слово Сброс">
-                </div>
-
-                <div class="modal-actions">
-                    <button id="confirmResetBtn" class="btn btn-delete" disabled>Сбросить всё</button>
-                    <button id="cancelResetBtn" class="btn btn-cancel">Отмена</button>
                 </div>
             </div>
         </div>
