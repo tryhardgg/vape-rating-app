@@ -50,6 +50,7 @@ async function initApp() {
     initAddCardButton();
     initAddMvCardButton();
     initResetButton();
+    initScrollToTop();
     
     // Рендерим карточки для текущей вкладки
     renderCurrentTab();
@@ -713,6 +714,32 @@ function initResetButton() {
             closeResetModal();
             alert('✅ Данные сброшены! Создано 34 карточки Monster Vapor.');
         }
+    });
+}
+
+/**
+ * Инициализация кнопки скролла вверх
+ */
+function initScrollToTop() {
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    
+    // Показываем/скрываем кнопку при скролле
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.style.display = 'flex';
+            scrollBtn.classList.add('show');
+        } else {
+            scrollBtn.style.display = 'none';
+            scrollBtn.classList.remove('show');
+        }
+    });
+    
+    // Скролл вверх при клике
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
