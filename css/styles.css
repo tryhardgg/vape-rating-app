@@ -48,6 +48,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-size: 16px;
+    zoom: 1.25;
 }
 
 /* Псевдоэлемент для улучшения качества фона */
