@@ -284,7 +284,10 @@ function createCardElement(card) {
         const emojisDiv = document.createElement('div');
         emojisDiv.className = 'card-emojis';
 
-        cardEmojis.forEach(emoji => {
+        // Сортируем иконки по приоритету
+        const sortedEmojis = sortEmojisByPriority(cardEmojis);
+
+        sortedEmojis.forEach(emoji => {
             const emojiSpan = document.createElement('span');
             emojiSpan.className = 'card-emoji';
             emojiSpan.textContent = emoji;
@@ -510,13 +513,36 @@ function updateSelectedEmojisPreview() {
         return;
     }
     
+    // Сортируем иконки по приоритету
+    const sortedEmojis = sortEmojisByPriority(appState.tempEmojis);
+    
     container.innerHTML = '';
     
-    appState.tempEmojis.forEach(emoji => {
+    sortedEmojis.forEach(emoji => {
         const span = document.createElement('span');
         span.className = 'card-emoji';
         span.textContent = emoji;
         container.appendChild(span);
+    });
+}
+
+/**
+ * Сортирует иконки по приоритету
+ * @param {Array} emojis - массив иконок
+ * @returns {Array} отсортированный массив
+ */
+function sortEmojisByPriority(emojis) {
+    const priority = ['⚠️', '🌪', '🧼', '🍯', '💎'];
+    
+    return [...emojis].sort((a, b) => {
+        const indexA = priority.indexOf(a);
+        const indexB = priority.indexOf(b);
+        
+        // Если иконки нет в приоритете, отправляем в конец
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+        
+        return indexA - indexB;
     });
 }
 
