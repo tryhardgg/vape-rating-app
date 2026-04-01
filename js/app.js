@@ -38,8 +38,8 @@ async function initApp() {
     const syncedCards = await syncWithSupabase(appState.cards);
     if (syncedCards && syncedCards.length > 0) {
         appState.cards = syncedCards;
-        // Сохраняем синхронизированные данные локально
-        MonsterVaporStorage.saveData({ cards: appState.cards });
+        // НЕ сохраняем в localStorage (чтобы не переполнять)
+        // MonsterVaporStorage.saveData({ cards: appState.cards });
     }
     console.log('✅ Sync complete!');
     

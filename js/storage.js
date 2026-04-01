@@ -16,6 +16,11 @@ function saveData(data) {
         localStorage.setItem(STORAGE_KEY, serialized);
         return true;
     } catch (error) {
+        // Игнорируем ошибку переполнения (Supabase теперь основной)
+        if (error.name === 'QuotaExceededError') {
+            console.warn('⚠️ localStorage переполнен, используем только Supabase');
+            return false;
+        }
         console.error('Ошибка сохранения данных:', error);
         return false;
     }
@@ -56,6 +61,7 @@ async function saveCard(id, cardData, allCards) {
         allCards.push(cardData);
     }
     
+    // Пробуем сохранить в localStorage, но игнорируем ошибку переполнения
     saveData({ cards: allCards });
     
     // Сохраняем в Supabase
@@ -85,7 +91,10 @@ function getCard(id, allCards) {
  */
 function deleteCard(id, allCards) {
     const filtered = allCards.filter(card => card.id !== id);
+    
+    // Пробуем сохранить в localStorage, но игнорируем ошибку переполнения
     saveData({ cards: filtered });
+    
     return filtered;
 }
 
