@@ -728,9 +728,10 @@ function addNewCard(type = 'other') {
         name: 'New Flavor',
         flavor: '',
         brand: type === 'mv' ? 'Monster Vapor' : 'Custom',
-        isUserAdded: type === 'mv' // MV карточки, добавленные пользователем
+        isUserAdded: type === 'mv', // MV карточки, добавленные пользователем
+        isOther: type === 'other' // Эксперименты
     }, type === 'other');
-    
+
     appState.cards.push(newCard);
     MonsterVaporStorage.saveData({ cards: appState.cards });
 
