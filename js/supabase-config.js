@@ -23,6 +23,7 @@ async function saveCardToSupabase(card) {
                 rating_nastya: card.ratingNastya,
                 emojis: card.emojis || [],
                 is_filled: card.isFilled || false,
+                is_other: card.isOther || false,
                 updated_at: new Date().toISOString()
             }, {
                 onConflict: 'card_id'
@@ -66,7 +67,8 @@ async function loadCardsFromSupabase() {
                 emojisSasha: row.emojis || [],
                 emojisNastya: row.emojis || [],
                 isFilled: row.is_filled,
-                isOther: false
+                isOther: row.is_other || false,
+                isUserAdded: true
             };
         });
         
