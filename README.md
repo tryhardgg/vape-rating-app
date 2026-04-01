@@ -6,6 +6,20 @@
 
 ---
 
+## 📚 Документация
+
+**Полная документация:** [`PROJECT_DOCS/`](PROJECT_DOCS/)
+
+| Документ | Описание |
+|----------|----------|
+| [`PROJECT_DOCS/README.md`](PROJECT_DOCS/README.md) | Основная документация проекта |
+| [`PROJECT_DOCS/SYSTEM_PROMPT.md`](PROJECT_DOCS/SYSTEM_PROMPT.md) | **Системный промпт для ИИ** (обязательно к прочтению!) |
+| [`PROJECT_DOCS/DATABASE_SCHEMA.md`](PROJECT_DOCS/DATABASE_SCHEMA.md) | Схема базы данных Supabase |
+| [`PROJECT_DOCS/API_REFERENCE.md`](PROJECT_DOCS/API_REFERENCE.md) | Справочник JavaScript функций |
+| [`FUTURE_PLANS.md`](FUTURE_PLANS.md) | Планы на будущее |
+
+---
+
 ## 📋 Оглавление
 
 1. [О проекте](#о-проекте)
