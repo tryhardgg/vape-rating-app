@@ -617,15 +617,32 @@ function updateAverageRating() {
 /**
  * Сохраняет текущую карточку
  */
-function saveCurrentCard() {
+async function saveCurrentCard() {
     const cardId = appState.currentEditingCardId;
     if (!cardId) return;
 
     const card = MonsterVaporStorage.getCard(cardId, appState.cards);
     if (!card) return;
 
+    // Получаем название вкуса
+    const flavorName = document.getElementById('flavorName').value.trim();
+    
+    // Проверяем на дубликаты (если название изменилось)
+    if (flavorName && flavorName !== card.flavor) {
+        const duplicateCard = appState.cards.find(c => 
+            c.flavor && 
+            c.flavor.toLowerCase() === flavorName.toLowerCase() && 
+            c.id !== cardId
+        );
+        
+        if (duplicateCard) {
+            alert('⚠️ Жидкость с таким названием уже существует!\n\nНазвание: "' + flavorName + '"\n\nПожалуйста, выберите уникальное название.');
+            return; // Не сохраняем, выходим
+        }
+    }
+
     // Обновляем данные
-    card.flavor = document.getElementById('flavorName').value.trim();
+    card.flavor = flavorName;
     card.note = document.getElementById('note').value.trim();
     card.image = appState.tempImage; // Сохраняем изображение
 
