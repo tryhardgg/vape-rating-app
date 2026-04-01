@@ -636,7 +636,7 @@ async function saveCurrentCard() {
         );
         
         if (duplicateCard) {
-            alert('⚠️ Жидкость с таким названием уже существует!\n\nНазвание: "' + flavorName + '"\n\nПожалуйста, выберите уникальное название.');
+            showWarningModal('Жидкость с таким названием уже существует!\n\nНазвание: "' + flavorName + '"\n\nПожалуйста, выберите уникальное название.');
             return; // Не сохраняем, выходим
         }
     }
@@ -733,6 +733,38 @@ function initScrollToTop() {
             behavior: 'smooth'
         });
     });
+}
+
+/**
+ * Показывает модальное окно предупреждения
+ * @param {string} message - Текст предупреждения
+ */
+function showWarningModal(message) {
+    const modal = document.getElementById('warningModal');
+    const messageEl = document.getElementById('warningMessage');
+    const closeBtn = document.getElementById('warningModalClose');
+    const okBtn = document.getElementById('warningOkBtn');
+    
+    // Устанавливаем текст
+    messageEl.textContent = message;
+    
+    // Показываем модальное окно
+    modal.classList.add('active');
+    
+    // Закрытие по кнопке
+    const closeModal = () => {
+        modal.classList.remove('active');
+    };
+    
+    closeBtn.addEventListener('click', closeModal, { once: true });
+    okBtn.addEventListener('click', closeModal, { once: true });
+    
+    // Закрытие по клику вне окна
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    }, { once: true });
 }
 
 /**

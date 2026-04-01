@@ -960,6 +960,42 @@ body::before {
     cursor: not-allowed;
 }
 
+/* --- МОДАЛЬНОЕ ОКНО ПРЕДУПРЕЖДЕНИЯ --- */
+.warning-modal {
+    max-width: 450px;
+    text-align: center;
+}
+
+.warning-modal .modal-title {
+    color: var(--accent);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.warning-icon {
+    font-size: 64px;
+    margin: 20px 0;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.warning-message {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(233, 69, 96, 0.1);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    font-family: 'Galaktika', sans-serif;
+}
+
 /* --- КНОПКА СКРОЛЛА ВВЕРХ --- */
 .scroll-to-top-btn {
     position: fixed;

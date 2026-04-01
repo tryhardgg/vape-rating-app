@@ -163,6 +163,23 @@
         </div>
     </div>
 
+    <!-- Модальное окно предупреждения (дубликат) -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content warning-modal">
+            <button class="modal-close" id="warningModalClose">&times;</button>
+            <h2 class="modal-title">⚠️ Внимание</h2>
+            
+            <div class="modal-body">
+                <div class="warning-icon">⚠️</div>
+                <p class="warning-message" id="warningMessage">Текст предупреждения</p>
+                
+                <div class="modal-actions">
+                    <button id="warningOkBtn" class="btn btn-save">Понятно</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Скрипты -->
     <!-- Supabase библиотека -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
