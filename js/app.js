@@ -651,7 +651,7 @@ function saveCurrentCard() {
 /**
  * Удаляет текущую карточку
  */
-function deleteCurrentCard() {
+async function deleteCurrentCard() {
     const cardId = appState.currentEditingCardId;
     if (!cardId) return;
 
@@ -660,7 +660,7 @@ function deleteCurrentCard() {
     if (!card || (!card.isOther && !card.isUserAdded)) return;
 
     if (confirm('Вы уверены, что хотите удалить эту карточку?')) {
-        appState.cards = MonsterVaporStorage.deleteCard(cardId, appState.cards);
+        appState.cards = await MonsterVaporStorage.deleteCard(cardId, appState.cards);
         renderCurrentTab();
         closeModal();
     }

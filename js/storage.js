@@ -89,11 +89,16 @@ function getCard(id, allCards) {
  * @param {Array} allCards - весь массив карточек
  * @returns {Array} обновлённый массив карточек
  */
-function deleteCard(id, allCards) {
+async function deleteCard(id, allCards) {
     const filtered = allCards.filter(card => card.id !== id);
     
     // Пробуем сохранить в localStorage, но игнорируем ошибку переполнения
     saveData({ cards: filtered });
+    
+    // Удаляем из Supabase
+    if (typeof deleteCardFromSupabase === 'function') {
+        await deleteCardFromSupabase(id);
+    }
     
     return filtered;
 }

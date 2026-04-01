@@ -103,7 +103,7 @@ async function syncWithSupabase(localCards) {
     try {
         // Загружаем данные из Supabase
         const remoteCards = await loadCardsFromSupabase();
-        
+
         if (remoteCards.length === 0) {
             // Если в базе пусто, сохраняем локальные данные
             for (const card of localCards) {
@@ -113,12 +113,31 @@ async function syncWithSupabase(localCards) {
             }
             return localCards;
         }
-        
+
         // Если в базе есть данные, используем их
         return remoteCards;
     } catch (error) {
         console.warn('⚠️ Supabase не доступен, используем локальные данные:', error.message);
         // Возвращаем локальные данные если Supabase не работает
         return localCards;
+    }
+}
+
+/**
+ * Удалить карточку из Supabase
+ */
+async function deleteCardFromSupabase(cardId) {
+    try {
+        const { error } = await supabaseClient
+            .from('cards')
+            .delete()
+            .eq('card_id', String(cardId));
+        
+        if (error) throw error;
+        console.log('✅ Card deleted from Supabase:', cardId);
+        return true;
+    } catch (error) {
+        console.error('❌ Error deleting card:', error);
+        return false;
     }
 }
